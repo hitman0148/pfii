@@ -23,7 +23,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
     })->name('designation');
 
     Route::get('/form-member', function () {
-        return view('/admin.forms.f_members')->with('title','Regisration');
+        return view('/admin.forms.f_members')->with('title','Registration');
     })->name('form-member');
 
     Route::get('/form-accomp', function () {
@@ -33,6 +33,10 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::get('/calendar', function () {
         return view('/admin.calendar')->with('title','Calendar');
     })->name('calendar');
+
+    Route::get('/monthly-due', function () {
+        return view('/admin.monthly-due')->with('title','Monthly Due');
+    })->name('monthly-due');
 
     Route::get('/', function () {
         return view('/admin.index')->with('title','Home');

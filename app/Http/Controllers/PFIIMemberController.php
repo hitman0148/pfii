@@ -25,7 +25,7 @@ class PFIIMemberController extends Controller
         $member->gender = $request->gender;
         $member->civil_stat = $request->civil_stat;
         $member->address = $request->address;
-        $member->date_joined = $request->date_joined;
+        $member->mobile_no = $request->mobile_no;
         $member->date_expiration = $request->date_expiration;
         if($member->save()){
             $msg = [

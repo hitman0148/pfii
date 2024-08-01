@@ -1,6 +1,8 @@
 @extends('layout.template')
 @section('pageTitle', isset($pageTitle) ? $pageTitle : 'Sample')
+
 @section('content')
+
     <div class="main-container">
         <div class="xs-pd-20-10 pd-ltr-20">
             <div class="title pb-20">
@@ -108,6 +110,10 @@
         </div>
 
     </div>
+@endsection
+
+@section('links')
+    <link rel="stylesheet" href="{{ url('resources/assets/admin/src/plugins/fullcalendar/fullcalendar.css') }}">
 @endsection
 
 @section('scripts')

@@ -13,7 +13,7 @@
                 <h4 class="text-blue h4">Member List</h4>
             </div>
             <div class="pb-20">
-                <table class="data-table table stripe hover nowrap">
+                <table class="data-table-export table stripe hover nowrap">
                     <thead>
                     <tr>
                         <th>ID No.</th>
@@ -75,5 +75,96 @@
     <script src="{{ url('resources/assets/admin/src/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ url('resources/assets/admin/src/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
     <script src="{{ url('resources/assets/admin/src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
-    <script src="{{ url('resources/assets/admin/vendors/scripts/datatable-setting.js') }}"></script>
+    <script src="{{ url('resources/assets/admin/src/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script>
+
+    <!-- buttons for Export datatable -->
+    <script src="{{ url('resources/assets/admin/src/plugins/datatables/js/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ url('resources/assets/admin/src/plugins/datatables/js/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ url('resources/assets/admin/src/plugins/datatables/js/buttons.print.min.js') }}"></script>
+    <script src="{{ url('resources/assets/admin/src/plugins/datatables/js/buttons.html5.min.js') }}"></script>
+    <script src="{{ url('resources/assets/admin/src/plugins/datatables/js/buttons.flash.min.js') }}"></script>
+    <script src="{{ url('resources/assets/admin/src/plugins/datatables/js/pdfmake.min.js') }}"></script>
+    <script src="{{ url('resources/assets/admin/src/plugins/datatables/js/vfs_fonts.js') }}"></script>
+
+    <script>
+
+        $('document').ready(function() {
+            // $('.data-table').DataTable({
+            //     scrollCollapse: true,
+            //     autoWidth: false,
+            //     responsive: true,
+            //     columnDefs: [{
+            //         targets: "datatable-nosort",
+            //         orderable: false,
+            //     }],
+            //     "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+            //     "language": {
+            //         "info": "_START_-_END_ of _TOTAL_ entries",
+            //         searchPlaceholder: "Search",
+            //         paginate: {
+            //             next: '<i class="ion-chevron-right"></i>',
+            //             previous: '<i class="ion-chevron-left"></i>'
+            //         }
+            //     },
+            // });
+
+
+            $.ajax({
+                url:"{{ url('/api/members') }}",
+                type:'get',
+                dataType:'json',
+                success:function(data){
+                    console.log(data);
+                    var outputdata = [];
+                    $.each(data, function(ind,res) {
+
+                            outputdata[ind] = [
+                                res.id_no,
+                                res.fname + ',' + res.lname,
+                                res.bday,
+                                res.gender,
+                                res.civil_stat,
+                                res.address,
+                                res.mobile_no,
+                             ];
+
+                    });
+                    setDataInTbl(outputdata)
+                }
+            })
+
+
+        });
+
+
+        function setDataInTbl(data){
+            $('.data-table-export').DataTable({
+                scrollCollapse: true,
+                autoWidth: false,
+                responsive: true,
+                data: data,
+                columnDefs: [{
+                    targets: "datatable-nosort",
+                    orderable: false,
+                }],
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                "language": {
+                    "info": "_START_-_END_ of _TOTAL_ entries",
+                    searchPlaceholder: "Search",
+                    paginate: {
+                        next: '<i class="ion-chevron-right"></i>',
+                        previous: '<i class="ion-chevron-left"></i>'
+                    }
+                },
+                dom: 'Bfrtp',
+                buttons: [
+                    'copy', 'csv', 'pdf', 'print'
+                ]
+            });
+        }
+
+
+
+
+    </script>
 @endsection

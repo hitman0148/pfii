@@ -23,7 +23,7 @@ class CreatePFIIMembersTable extends Migration
             $table->string('gender');
             $table->string('civil_stat');
             $table->text('address');
-            $table->date('date_joined');
+            $table->string('mobile_no',20);
             $table->date('date_expiration');
             $table->enum('is_active',['Y','N'])->default('Y');
         });

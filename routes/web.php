@@ -36,6 +36,6 @@ Route::get('/', function () {
 
 
 //Route::get('/',[PageController::class, 'login'])->name('login');
-//Route::get('/test',function(){
-//    return view('sample')->with('title','Sample');
-//});
+Route::get('/test',function(){
+    return view('sample')->with('title','Sample');
+});

@@ -18,7 +18,7 @@ class PFII_Member extends Model
         'gender',
         'civil_stat',
         'address',
-        'date_joined',
+        'mobile_no',
         'date_expiration',
         'is_active'
     ];
