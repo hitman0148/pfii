@@ -72,5 +72,8 @@
 @endsection
 
 @section('scripts')
+    <script src="{{ url('resources/assets/admin/src/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ url('resources/assets/admin/src/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ url('resources/assets/admin/src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
     <script src="{{ url('resources/assets/admin/vendors/scripts/datatable-setting.js') }}"></script>
 @endsection

@@ -111,9 +111,6 @@
 @endsection
 
 @section('scripts')
-{{--    <script src="{{ url('resources/assets/admin/vendors/scripts/core.js') }}"></script>--}}
-{{--    <script src="{{ url('resources/assets/admin/vendors/scripts/process.js') }}"></script>--}}
-{{--    <script src="{{ url('resources/assets/admin/vendors/scripts/layout-settings.js') }}"></script>--}}
-    <script src="{{ url('resources/assets/admin/src/plugins/fullcalendar/fucv ccdcxfv zzllcalendar.min.js') }}"></script>
+    <script src="{{ url('resources/assets/admin/src/plugins/fullcalendar/fullcalendar.min.js') }}"></script>
     <script src="{{ url('resources/assets/admin/vendors/scripts/calendar-setting.js') }}"></script>
 @endsection

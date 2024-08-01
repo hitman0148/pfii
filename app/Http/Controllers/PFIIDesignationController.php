@@ -2,62 +2,56 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PFII_designation;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PFIIDesignationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        return PFII_designation::all();
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+
     public function store(Request $request)
     {
-        //
+        $des = new PFII_designation();
+        $des->designation = $request->designation;
+        $des->is_active = $request->is_active;
+        $des->date_created = date('Y-m-d');
+//        $des->created_by = $request->created_by;
+        $des->created_by = Auth::check();
+        if($des->save()){
+            $msg = [
+                'status' => 'Success',
+                'statusCode' => 200
+            ];
+        }else{
+            $msg = array(
+                'status' => 'Something went wrong!',
+                'statusCode' => 500
+            );
+        }
+        return response()->json($msg);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function show($id)
     {
-        //
+        return PFII_designation::where('id',$id)->get();
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+
+    public function update(Request $request)
     {
-        //
+        return PFII_designation::where('id',$request->id)->update(['designation' => $request->designation]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+
     public function destroy($id)
     {
-        //
+        return PFII_designation::where('id',$id)->update(['is_active' => 'N']);
     }
 }
