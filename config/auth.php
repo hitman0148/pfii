@@ -141,10 +141,17 @@ return [
             'throttle' => 60,
         ],
 
-        'admin' => [
-            'driver' => 'eloquent',
-            'model' => \App\Models\Admin::class,
+        'admins' => [
+            'provider' => 'admins',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
         ],
+
+//        'admins' => [
+//            'driver' => 'eloquent',
+//            'model' => \App\Models\Admin::class,
+//        ],
 
         'clients' => [
             'driver' => 'eloquent',

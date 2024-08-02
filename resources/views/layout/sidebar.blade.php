@@ -170,7 +170,7 @@
 
 <div class="left-side-bar">
     <div class="brand-logo">
-        <a href="index.html">
+        <a href="{{ route('admin.home') }}">
             <img src="{{ url('resources/assets/admin/vendors/images/deskapp-logo.svg') }}" alt="" class="dark-logo" />
             <img
                 src="{{ url('resources/assets/admin/vendors/images/deskapp-logo-white.svg') }}"
@@ -185,17 +185,6 @@
     <div class="menu-block customscroll">
         <div class="sidebar-menu">
             <ul id="accordion-menu">
-{{--                <li class="dropdown">--}}
-{{--                    <a href="javascript:;" class="dropdown-toggle">--}}
-{{--								<span class="micon bi bi-house"></span--}}
-{{--                                ><span class="mtext">Home</span>--}}
-{{--                    </a>--}}
-{{--                    <ul class="submenu">--}}
-{{--                        <li><a href="{{ route('admin.home') }}">Dashboard</a></li>--}}
-{{--                        <li><a href="index2.html"></a></li>--}}
-{{--                        <li><a href="index3.html">Dashboard style 3</a></li>--}}
-{{--                    </ul>--}}
-{{--                </li>--}}
 
                 <li>
                     <a href="{{ route('admin.home') }}" class="dropdown-toggle no-arrow">
@@ -229,8 +218,8 @@
                                 ><span class="mtext">Report</span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="basic-table.html">Basic Tables</a></li>
-                        <li><a href="datatable.html">DataTables</a></li>
+                        <li><a href="#">Basic Tables</a></li>
+                        <li><a href="#">DataTables</a></li>
                     </ul>
                 </li>
                 <li>
@@ -240,12 +229,6 @@
                     </a>
                 </li>
 
-{{--                <li>--}}
-{{--                    <a href="invoice.html" class="dropdown-toggle no-arrow">--}}
-{{--								<span class="micon bi bi-receipt-cutoff"></span--}}
-{{--                                ><span class="mtext">Invoice</span>--}}
-{{--                    </a>--}}
-{{--                </li>--}}
                 <li>
                     <div class="dropdown-divider"></div>
                 </li>

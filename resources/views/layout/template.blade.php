@@ -3,6 +3,7 @@
 <head>
     <!-- Basic Page Info -->
     <meta charset="utf-8" />
+    <meta name="csrf_token" content="{{ csrf_token() }}" />
     <title>{{ $title }}</title>
 
     <!-- Site favicon -->

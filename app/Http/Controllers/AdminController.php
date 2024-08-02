@@ -39,13 +39,23 @@ class AdminController extends Controller
         );
 
         if(Auth::guard('admin')->attempt($creds)){
-            return redirect()->route('admin.home');
+//        if(Auth::attempt($creds)){
+            return redirect('/admin/home');
+//            return redirect()->route('admin.home');
 //            return view('admin.index')->with('title','Home');
         }else{
             session()->flash('fail','Incorrect credentials');
+//            return redirect()->back()->withErrors(['fail','Invalid Credentials']);
             return view('admin.login')->with('title','Login');
         }
-//        return view('admin.index')->with('title','Home');
+    }
+
+
+
+    function logOut(){
+//            return 'test';
+        Auth::logout();
+        return view('admin.login')->with('title','Login');
     }
 
 }

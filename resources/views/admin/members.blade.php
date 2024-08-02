@@ -17,12 +17,12 @@
                     <thead>
                     <tr>
                         <th>ID No.</th>
-                        <th class="table-plus datatable-nosort">Name</th>
-                        <th>Position</th>
-                        <th>Chapter</th>
-                        <th>Expiration Date</th>
-                        <th>Status</th>
-                        <th class="datatable-nosort">Action</th>
+                        <th class="table-plus datatable-nosort">Full Name</th>
+                        <th>Birth Day</th>
+                        <th>Gender</th>
+                        <th>Civil Status</th>
+                        <th>Address</th>
+                        <th class="datatable-nosort">Mobile No.</th>
                     </tr>
                     </thead>
                     <tbody>

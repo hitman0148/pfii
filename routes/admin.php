@@ -9,6 +9,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
 
     Route::post('login_handler',[AdminController::class,'loginHandler'])->name('login_handler');
+    Route::get('logout',[AdminController::class,'logOut'])->name('logout');
 
     Route::get('/home', function () {
         return view('/admin.home')->with('title','Home');

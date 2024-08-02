@@ -125,6 +125,7 @@
 										class="form-control form-control-lg"
 										placeholder="Username"
                                         name="login_id"
+                                        value="{{old('login_id')}}"
 									/>
 									<div class="input-group-append custom">
 										<span class="input-group-text"
@@ -144,6 +145,7 @@
 										class="form-control form-control-lg"
 										placeholder="**********"
                                         name="password"
+                                        value="{{old('password')}}"
 									/>
 									<div class="input-group-append custom">
 										<span class="input-group-text"

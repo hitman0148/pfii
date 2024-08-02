@@ -15,15 +15,17 @@
                             <h4 class="text-blue h4">Designation Form</h4>
                         </div>
                         <div class="pd-20">
-                            <form>
+                            <form id="desForm">
                                 <div class="form-group">
                                     <label>Designation</label>
                                     <input
                                         class="form-control"
                                         type="text"
+                                        name="designation"
                                     />
+                                    <input type="hidden" name="created_by" value="{{ Auth('admin')->user()->name }}">
                                 </div>
-                                <button class="btn btn-info">Submit</button>
+                                <button class="btn btn-info" type="submit">Submit</button>
                             </form>
                         </div>
                     </div>
@@ -94,5 +96,96 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ url('resources/assets/admin/vendors/scripts/datatable-setting.js') }}"></script>
+
+    <script src="{{ url('resources/assets/admin/src/plugins/datatables/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ url('resources/assets/admin/src/plugins/datatables/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ url('resources/assets/admin/src/plugins/datatables/js/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ url('resources/assets/admin/src/plugins/datatables/js/responsive.bootstrap4.min.js') }}"></script>
+{{--    <script src="{{ url('resources/assets/admin/vendors/scripts/datatable-setting.js') }}"></script>--}}
+
+    <script src="{{ url('resources/assets/admin/src/plugins/sweetalert2/sweetalert2.all.js') }}"></script>
+    <script>
+        $(document).on('submit','#desForm',function(e){
+            e.preventDefault();
+
+            $.ajax({
+                url:"{{ url('/api/designation') }}",
+                type:'post',
+                dataType:'json',
+                data: $(this).serialize(),
+                success:function(data){
+                    console.log(data);
+                    if(data.statusCode ==  200) {
+                        getData();
+                        swalSuccess(data.status);
+                        $('#desForm')[0].reset();
+                    }
+                }
+            })
+        })
+
+        $(document).ready(function(){
+            getData();
+        });
+
+        function swalSuccess(msg) {
+            swal(
+                {
+                    title: 'Good job!',
+                    text: msg,
+                    type: 'success',
+                    showCancelButton: true,
+                    confirmButtonClass: 'btn btn-success',
+                    cancelButtonClass: 'btn btn-danger',
+                    timer: 1500
+                }
+            )
+        }
+
+        function getData(){
+            $.ajax({
+                url:"{{ url('/api/designations') }}",
+                type:"get",
+                dataType:'json',
+                success:function(data){
+                    console.log(data);
+                    var outputdata = [];
+                    $.each(data, function(ind,res) {
+
+                        outputdata[ind] = [
+                            res.id,
+                            res.designation,
+                            res.id,
+                        ];
+                    });
+                    setDataInTbl(outputdata)
+                }
+            })
+        }
+
+
+
+        function setDataInTbl(data){
+            $('.data-table').DataTable({
+                destroy: true,
+                scrollCollapse: true,
+                autoWidth: false,
+                responsive: true,
+                data:data,
+                columnDefs: [{
+                    targets: "datatable-nosort",
+                    orderable: false,
+                }],
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                "language": {
+                    "info": "_START_-_END_ of _TOTAL_ entries",
+                    searchPlaceholder: "Search",
+                    paginate: {
+                        next: '<i class="ion-chevron-right"></i>',
+                        previous: '<i class="ion-chevron-left"></i>'
+                    }
+                },
+            });
+        }
+    </script>
 @endsection

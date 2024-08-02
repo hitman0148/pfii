@@ -166,7 +166,7 @@
 
     <!-- add sweet alert js & css in footer -->
     <script src="{{ url('resources/assets/admin/src/plugins/sweetalert2/sweetalert2.all.js') }}"></script>
-    <script src="{{ url('resources/assets/admin/src/plugins/sweetalert2/sweet-alert.init.js') }}"></script>
+{{--    <script src="{{ url('resources/assets/admin/src/plugins/sweetalert2/sweet-alert.init.js') }}"></script>--}}
     <script>
 
         $(document).on('submit','#memberForm',function(e){
@@ -181,7 +181,7 @@
                     console.log(data);
                     if(data.statusCode == 200){
                         $('#memberForm')[0].reset();
-                        swalSuccess();
+                        swalSuccess(data.status);
                     }else{
                         swalError();
                     }

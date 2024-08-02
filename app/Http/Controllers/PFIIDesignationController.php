@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\PFII_designation;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class PFIIDesignationController extends Controller
 {
@@ -19,10 +18,9 @@ class PFIIDesignationController extends Controller
     {
         $des = new PFII_designation();
         $des->designation = $request->designation;
-        $des->is_active = $request->is_active;
+//        $des->is_active = $request->is_active;
         $des->date_created = date('Y-m-d');
-//        $des->created_by = $request->created_by;
-        $des->created_by = Auth::check();
+        $des->created_by = $request->created_by;
         if($des->save()){
             $msg = [
                 'status' => 'Success',
