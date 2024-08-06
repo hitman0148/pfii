@@ -10,7 +10,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
     Route::post('login_handler',[AdminController::class,'loginHandler'])->name('login_handler');
     Route::get('logout',[AdminController::class,'logOut'])->name('logout');
 
-    Route::middleware('admin')->group(function(){
+    Route::middleware(['admin','preventBack'])->group(function(){
         Route::get('/home', function () {
             return view('/admin.home')->with('title','Home');
         })->name('home');
@@ -42,6 +42,12 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/', function () {
             return view('/admin.index')->with('title','Home');
         });
+
+
+        Route::get('/test',function(){
+            return view('sample')->with('title','Sample');
+        });
+
     });
 
 

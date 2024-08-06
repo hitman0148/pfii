@@ -23,19 +23,11 @@ Route::get('/home', function () {
 });
 
 
-//Route::get('admin/home', function () {
-//    return view('admin.index')->with('title','Home');
-//});
 Route::get('login', function () {
-    return view('admin.login')->with('title','Login');
+    return view('admin.login')->with('title', 'Login');
 })->name('login');
 
 Route::get('/', function () {
-    return view('admin.login')->with('title','Login');
+    return view('admin.login')->with('title', 'Login');
 })->name('login');
 
-
-//Route::get('/',[PageController::class, 'login'])->name('login');
-Route::get('/test',function(){
-    return view('sample')->with('title','Sample');
-});
