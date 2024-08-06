@@ -53,8 +53,8 @@ class AdminController extends Controller
 
 
     function logOut(){
-//            return 'test';
-        Auth::logout();
+
+        Auth('admin')->logout();
         return view('admin.login')->with('title','Login');
     }
 

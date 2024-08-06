@@ -28,11 +28,11 @@ Route::get('/home', function () {
 //});
 Route::get('login', function () {
     return view('admin.login')->with('title','Login');
-});
+})->name('login');
 
 Route::get('/', function () {
     return view('admin.login')->with('title','Login');
-});
+})->name('login');
 
 
 //Route::get('/',[PageController::class, 'login'])->name('login');

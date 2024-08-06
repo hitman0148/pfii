@@ -53,9 +53,9 @@
                     role="button"
                     data-toggle="dropdown"
                 >
-							<span class="user-icon">
-								<img src="{{ url('resources/assets/admin/vendors/images/photo1.jpg') }}" alt="" />
-							</span>
+                        <span class="user-icon">
+                            <img src="{{ url('resources/assets/admin/vendors/images/photo1.jpg') }}" alt="" />
+                        </span>
                     <span class="user-name">{{ Auth('admin')->user()->name }}</span>
                 </a>
                 <div
