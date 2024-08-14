@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\PFII_Member;
 use Illuminate\Http\Request;
+use App\Imports\MemberImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PFIIMemberController extends Controller
 {
+    public function import(){
+        Excel::import(new MemberImport, 'users.xlsx');
+        return redirect('/admin/home')->with('success','All Goods!');
+    }
 
     public function index()
     {

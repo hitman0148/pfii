@@ -7,13 +7,19 @@
         <div class="title pb-20">
             <h2 class="h3 mb-0">PARDSS-FII</h2>
         </div>
+
+        <div class="xs-pd-20-10 mb-2">
+            <button class="btn btn-info btn-sm" onclick="getModal()">Import</button>
+        </div>
         <!-- Simple Datatable start -->
         <div class="card-box mb-30">
             <div class="pd-20">
                 <h4 class="text-blue h4">Member List</h4>
             </div>
+
             <div class="pb-20">
-                <table class="data-table-export table stripe hover nowrap">
+
+                <table class="data-table table stripe hover nowrap">
                     <thead>
                     <tr>
                         <th>ID No.</th>
@@ -69,6 +75,42 @@
     </div>
 </div>
 
+
+<div
+    class="modal fade"
+    id="Medium-modal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myLargeModalLabel"
+    aria-hidden="true"
+>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">
+                    Large modal
+                </h4>
+                <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-hidden="true"
+                >
+                    ×
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ url('') }}" enctype="multipart/form-data" method="POST">
+                    @csrf
+                    <input type="file" name="import_file" class="form-control">
+                    <button type="submit" class="btn btn-primary">Import</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 @endsection
 
 @section('scripts')
@@ -89,25 +131,6 @@
     <script>
 
         $('document').ready(function() {
-            // $('.data-table').DataTable({
-            //     scrollCollapse: true,
-            //     autoWidth: false,
-            //     responsive: true,
-            //     columnDefs: [{
-            //         targets: "datatable-nosort",
-            //         orderable: false,
-            //     }],
-            //     "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-            //     "language": {
-            //         "info": "_START_-_END_ of _TOTAL_ entries",
-            //         searchPlaceholder: "Search",
-            //         paginate: {
-            //             next: '<i class="ion-chevron-right"></i>',
-            //             previous: '<i class="ion-chevron-left"></i>'
-            //         }
-            //     },
-            // });
-
 
             $.ajax({
                 url:"{{ url('/api/members') }}",
@@ -129,16 +152,37 @@
                              ];
 
                     });
-                    setDataInTbl(outputdata)
+                    // setDataInTbl(outputdata);
+                    setDataTbl(outputdata);
                 }
             })
-
-
         });
+
+        function setDataTbl(data){
+            $('.data-table').DataTable({
+                scrollCollapse: true,
+                autoWidth: false,
+                responsive: true,
+                data: data,
+                columnDefs: [{
+                    targets: "datatable-nosort",
+                    orderable: false,
+                }],
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                "language": {
+                    "info": "_START_-_END_ of _TOTAL_ entries",
+                    searchPlaceholder: "Search",
+                    paginate: {
+                        next: '<i class="ion-chevron-right"></i>',
+                        previous: '<i class="ion-chevron-left"></i>'
+                    }
+                },
+            });
+        }
 
 
         function setDataInTbl(data){
-            $('.data-table-export').DataTable({
+            $('.data-table').DataTable({
                 scrollCollapse: true,
                 autoWidth: false,
                 responsive: true,
@@ -158,10 +202,19 @@
                 },
                 dom: 'Bfrtp',
                 buttons: [
-                    'copy', 'csv', 'pdf', 'print'
+                    'copy',
+                    'csv',
+                    'pdf',
+                    'print'
                 ]
             });
         }
+
+
+        function getModal(){
+            $('#Medium-modal').modal();
+        }
+
 
 
 

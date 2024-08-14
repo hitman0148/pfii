@@ -71,3 +71,9 @@ copy .env.example and rename .env then save
 .env
 
 > php artisan db:seed
+
+## Laravel Excel 
+> composer update
+> composer require maatwebsite/excel
+
+For more info please visit this site [Laravel Excel](https://docs.laravel-excel.com/3.1/getting-started/installation.html)

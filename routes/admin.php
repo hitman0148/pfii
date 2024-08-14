@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PFIIMemberController;
 
 
 Route::prefix('admin')->name('admin.')->group(function(){
@@ -42,6 +43,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/', function () {
             return view('/admin.index')->with('title','Home');
         });
+
+        Route::post('/import/member',[PFIIMemberController::class,'import' ]);
 
 
         Route::get('/test',function(){
