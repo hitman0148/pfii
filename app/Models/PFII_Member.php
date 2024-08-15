@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class PFII_Member extends Model
 {
-
+    use HasFactory;
     protected $table = 'pfii_members';
     protected $fillable = [
         'id_no',
@@ -22,8 +22,6 @@ class PFII_Member extends Model
         'date_expiration',
         'is_active'
     ];
-    use HasFactory;
-
 
     public $timestamps = false;
 }

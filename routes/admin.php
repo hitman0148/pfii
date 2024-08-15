@@ -44,7 +44,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
             return view('/admin.index')->with('title','Home');
         });
 
-        Route::post('/import/member',[PFIIMemberController::class,'import' ]);
+        Route::post('/import/member',[PFIIMemberController::class,'importExcel' ]);
+        Route::get('/export/member',[PFIIMemberController::class,'exportExcel' ]);
 
 
         Route::get('/test',function(){

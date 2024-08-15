@@ -8,8 +8,16 @@
             <h2 class="h3 mb-0">PARDSS-FII</h2>
         </div>
 
+        @if(session('status'))
+            <div class="alert alert-success">{{ session('status') }}</div>
+        @endif
+
         <div class="xs-pd-20-10 mb-2">
-            <button class="btn btn-info btn-sm" onclick="getModal()">Import</button>
+            <div class="row">
+                <button class="btn btn-info btn-sm mr-1" onclick="getModal()">Import</button>
+                <a href="{{ url('/public/member_temp.csv') }}" class="btn btn-warning btn-sm mr-1" >Template</a>
+                <a href="{{ url('admin/export/member') }}" class="btn btn-danger btn-sm mr-1" >Export</a>
+            </div>
         </div>
         <!-- Simple Datatable start -->
         <div class="card-box mb-30">
@@ -22,51 +30,30 @@
                 <table class="data-table table stripe hover nowrap">
                     <thead>
                     <tr>
+                        <th>
+                            <div class="dt-checkbox">
+                                <input
+                                    type="checkbox"
+                                    name="select_all"
+                                    value="1"
+                                    id="example-select-all"
+                                />
+                                <span class="dt-checkbox-label"></span>
+                            </div>
+                        </th>
                         <th>ID No.</th>
-                        <th class="table-plus datatable-nosort">Full Name</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>MI</th>
                         <th>Birth Day</th>
                         <th>Gender</th>
                         <th>Civil Status</th>
+                        <th>Mobile No.</th>
+                        <th>Date Expiration.</th>
                         <th>Address</th>
-                        <th class="datatable-nosort">Mobile No.</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td class="table-plus">Gloria F. Mead</td>
-                        <td>25</td>
-                        <td>Sagittarius</td>
-                        <td>2829 Trainer Avenue Peoria, IL 61602</td>
-                        <td>29-03-2018</td>
-                        <td>Active</td>
-                        <td>
-                            <div class="dropdown">
-                                <a
-                                    class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
-                                    href="#"
-                                    role="button"
-                                    data-toggle="dropdown"
-                                >
-                                    <i class="dw dw-more"></i>
-                                </a>
-                                <div
-                                    class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
-                                >
-                                    <a class="dropdown-item" href="#"
-                                    ><i class="dw dw-eye"></i> View</a
-                                    >
-                                    <a class="dropdown-item" href="#"
-                                    ><i class="dw dw-edit2"></i> Edit</a
-                                    >
-                                    <a class="dropdown-item" href="#"
-                                    ><i class="dw dw-delete-3"></i> Delete</a
-                                    >
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-
-
                     </tbody>
                 </table>
             </div>
@@ -100,10 +87,10 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{ url('') }}" enctype="multipart/form-data" method="POST">
+                <form action="{{ url('admin/import/member') }}" enctype="multipart/form-data" method="POST">
                     @csrf
-                    <input type="file" name="import_file" class="form-control">
-                    <button type="submit" class="btn btn-primary">Import</button>
+                    <input type="file" name="import_file" class="form-control mb-1" required>
+                    <button type="submit" class="btn btn-primary btn-sm">Import</button>
                 </form>
             </div>
 
@@ -132,92 +119,67 @@
 
         $('document').ready(function() {
 
-            $.ajax({
-                url:"{{ url('/api/members') }}",
-                type:'get',
-                dataType:'json',
-                success:function(data){
-                    console.log(data);
-                    var outputdata = [];
-                    $.each(data, function(ind,res) {
+        var table = $('.data-table').DataTable({
+                ajax: {
+                    url: "{{ url('/api/members') }}",
+                    dataSrc:'data'
+                },
+                columns:[
+                    {data: ''},
+                    {data: 'id_no'},
+                    {data: 'fname'},
+                    {data: 'lname'},
+                    {data: 'mi'},
+                    {data: 'bday'},
+                    {data: 'gender'},
+                    {data: 'civil_stat'},
+                    {data: 'mobile_no'},
+                    {data: 'date_expiration'},
+                    {data: 'address'},
+                ],
+                scrollCollapse: true,
+                autoWidth: false,
+                responsive: true,
+                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                "language": {
+                    "info": "_START_-_END_ of _TOTAL_ entries",
+                    searchPlaceholder: "Search",
+                    paginate: {
+                        next: '<i class="ion-chevron-right"></i>',
+                        previous: '<i class="ion-chevron-left"></i>'
+                    }
+                },
+                'columnDefs': [{
+                    'targets': 0,
+                    'searchable': false,
+                    'orderable': false,
+                    'className': 'dt-body-center',
+                    'render': function (data, type, full, meta){
+                        return '<div class="dt-checkbox"><input type="checkbox" name="id[]" value="' + $('<div/>').text(data).html() + '"><span class="dt-checkbox-label"></span></div>';
+                    }
+                }],
+                'order': [[1, 'asc']]
+            });
 
-                            outputdata[ind] = [
-                                res.id_no,
-                                res.fname + ',' + res.lname,
-                                res.bday,
-                                res.gender,
-                                res.civil_stat,
-                                res.address,
-                                res.mobile_no,
-                             ];
+            $('#example-select-all').on('click', function(){
+                var rows = table.rows({ 'search': 'applied' }).nodes();
+                $('input[type="checkbox"]', rows).prop('checked', this.checked);
+                console.log(rows);
+            });
 
-                    });
-                    // setDataInTbl(outputdata);
-                    setDataTbl(outputdata);
+            $('.data-table tbody').on('change', 'input[type="checkbox"]', function(){
+                if(!this.checked){
+                    var el = $('#example-select-all').get(0);
+                    console.log(el);
+                    if(el && el.checked && ('indeterminate' in el)){
+                        el.indeterminate = true;
+                    }
                 }
-            })
+            });
         });
-
-        function setDataTbl(data){
-            $('.data-table').DataTable({
-                scrollCollapse: true,
-                autoWidth: false,
-                responsive: true,
-                data: data,
-                columnDefs: [{
-                    targets: "datatable-nosort",
-                    orderable: false,
-                }],
-                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                "language": {
-                    "info": "_START_-_END_ of _TOTAL_ entries",
-                    searchPlaceholder: "Search",
-                    paginate: {
-                        next: '<i class="ion-chevron-right"></i>',
-                        previous: '<i class="ion-chevron-left"></i>'
-                    }
-                },
-            });
-        }
-
-
-        function setDataInTbl(data){
-            $('.data-table').DataTable({
-                scrollCollapse: true,
-                autoWidth: false,
-                responsive: true,
-                data: data,
-                columnDefs: [{
-                    targets: "datatable-nosort",
-                    orderable: false,
-                }],
-                "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                "language": {
-                    "info": "_START_-_END_ of _TOTAL_ entries",
-                    searchPlaceholder: "Search",
-                    paginate: {
-                        next: '<i class="ion-chevron-right"></i>',
-                        previous: '<i class="ion-chevron-left"></i>'
-                    }
-                },
-                dom: 'Bfrtp',
-                buttons: [
-                    'copy',
-                    'csv',
-                    'pdf',
-                    'print'
-                ]
-            });
-        }
-
 
         function getModal(){
             $('#Medium-modal').modal();
         }
-
-
-
-
-
     </script>
 @endsection

@@ -22,7 +22,8 @@
                                     <label>Date</label>
                                     <input
                                         class="form-control"
-                                        type="text"
+                                        type="date"
+                                        name="date_"
                                     />
                                 </div>
                             </div>
@@ -32,6 +33,7 @@
                                     <input
                                         class="form-control"
                                         type="text"
+                                        name="title"
                                     />
                                 </div>
                             </div>
@@ -44,6 +46,7 @@
                                     <label>Agenda</label>
                                     <textarea
                                         class="form-control"
+                                        name="agenda"
                                     >
                                     </textarea>
                                 </div>

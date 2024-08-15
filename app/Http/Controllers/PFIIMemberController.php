@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\MemberExport;
 use App\Models\PFII_Member;
 use Illuminate\Http\Request;
 use App\Imports\MemberImport;
@@ -9,14 +10,26 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class PFIIMemberController extends Controller
 {
-    public function import(){
-        Excel::import(new MemberImport, 'users.xlsx');
-        return redirect('/admin/home')->with('success','All Goods!');
+    public function importExcel(Request $request){
+
+        $request->validate([
+           'import_file' => [
+               'required',
+               'file'
+           ]
+        ]);
+        Excel::import(new MemberImport, $request->file('import_file'));
+//        Excel::toCollection(new MemberImport, $request->file('import_file'));
+        return redirect('/admin/members')->with('status','All Goods!');
+    }
+
+    public function exportExcel(){
+        return Excel::download(new MemberExport, 'members.xlsx');
     }
 
     public function index()
     {
-        return PFII_Member::all();
+        return json_encode(['data' => PFII_Member::where('is_active','Y')->get()]);
     }
 
 
