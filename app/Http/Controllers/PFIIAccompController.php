@@ -10,20 +10,22 @@ class PFIIAccompController extends Controller
 
     public function index()
     {
-        return PFII_Accomp::all();
+//        return PFII_Accomp::all();
+        return response()->json(['data' => PFII_Accomp::where('is_active','Y')->get()]);
     }
 
 
     public function store(Request $request)
     {
+
         $accomp = new PFII_Accomp();
         $accomp->activity_date = $request->activity_date;
         $accomp->site = $request->site;
         $accomp->activity = $request->activity;
         $accomp->remarks = $request->remarks;
-        $accomp->personels = $request->personels;
+        $accomp->personels = implode('+',$request->personels);
         $accomp->date_created = date('Y-m-d');
-        $accomp->created_by = $request->created_by;
+        $accomp->created_by =  $request->created_by;
         if($accomp->save()){
             $msg = array(
                 'status' => 'Success',

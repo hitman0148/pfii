@@ -8,6 +8,10 @@
                 <h2 class="h3 mb-0">PARDSS-FII</h2>
             </div>
 
+            @if(session('status'))
+                <div class="alert alert-success">{{ session('status') }}</div>
+            @endif
+
             <div class="row clearfix">
                 <div class="col-md-4 col-sm-12">
                     <div class="card-box">
@@ -25,7 +29,7 @@
                                     />
                                     <input type="hidden" name="created_by" value="{{ Auth('admin')->user()->name }}">
                                 </div>
-                                <button class="btn btn-info" type="submit">Submit</button>
+                                <button class="btn btn-info btn-sm" type="submit">Submit</button>
                             </form>
                         </div>
                     </div>
@@ -41,46 +45,19 @@
                     </div>
                     <div class="pb-20">
 
+                        <button class="btn btn-danger btn-sm ml-3 mb-3" id="btnTruncate">Truncate</button>
+                        <button class="btn btn-warning btn-sm ml-1 mb-3" id="btnImport">Import</button>
+                        <a href="{{ url('/public/temp/desig_temp.csv') }}" class="btn btn-success btn-sm ml-1 mb-3">Template</a>
+
                         <table class="data-table table stripe hover nowrap">
                             <thead>
                             <tr>
                                 <th>Id</th>
                                 <th class="table-plus datatable-nosort">Title</th>
-                                <th class="datatable-nosort">Action</th>
+{{--                                <th class="datatable-nosort">Action</th>--}}
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>25</td>
-                                <td class="table-plus">Gloria F. Mead</td>
-                                <td>
-                                    <div class="dropdown">
-                                        <a
-                                            class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
-                                            href="#"
-                                            role="button"
-                                            data-toggle="dropdown"
-                                        >
-                                            <i class="dw dw-more"></i>
-                                        </a>
-                                        <div
-                                            class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list"
-                                        >
-                                            <a class="dropdown-item" href="#"
-                                            ><i class="dw dw-eye"></i> View</a
-                                            >
-                                            <a class="dropdown-item" href="#"
-                                            ><i class="dw dw-edit2"></i> Edit</a
-                                            >
-                                            <a class="dropdown-item" href="#"
-                                            ><i class="dw dw-delete-3"></i> Delete</a
-                                            >
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-
-
                             </tbody>
                         </table>
 
@@ -92,6 +69,46 @@
             </div>
         </div>
     </div>
+
+
+
+{{--   import modal start  --}}
+
+<div
+    class="modal fade"
+    id="Medium-modal"
+    tabindex="-1"
+    role="dialog"
+    aria-labelledby="myLargeModalLabel"
+    aria-hidden="true"
+>
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myLargeModalLabel">
+                    Import Designation
+                </h4>
+                <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-hidden="true"
+                >
+                    ×
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ url('admin/import/desig') }}" enctype="multipart/form-data" method="POST">
+                    @csrf
+                    <input type="file" name="import_file" class="form-control mb-1" required>
+                    <button type="submit" class="btn btn-primary btn-sm">Import</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 
 @endsection
 
@@ -155,7 +172,7 @@
                         outputdata[ind] = [
                             res.id,
                             res.designation,
-                            res.id,
+                            // res.id,
                         ];
                     });
                     setDataInTbl(outputdata)
@@ -187,5 +204,9 @@
                 },
             });
         }
+
+        $('#btnImport').on('click',function(){
+            $('#Medium-modal').modal();
+        });
     </script>
 @endsection

@@ -21,7 +21,7 @@
                                     <label>ID No.</label>
                                     <input
                                         name="id_no"
-                                        class="form-control"
+                                        class="form-control form-control-sm"
                                         type="text"
                                         placeholder="SATC-00"
                                         required
@@ -33,7 +33,7 @@
                                 <div class="form-group">
                                     <label>Date Expiration</label>
                                     <input
-                                        class="form-control"
+                                        class="form-control form-control-sm"
                                         type="date"
                                         name="date_expiration"
                                         required
@@ -44,7 +44,7 @@
                                 <div class="form-group">
                                     <label>Mobile No</label>
                                     <input
-                                        class="form-control"
+                                        class="form-control form-control-sm"
                                         type="text"
                                         name="mobile_no"
                                         required
@@ -58,7 +58,7 @@
                                 <div class="form-group">
                                     <label>First Name</label>
                                     <input
-                                        class="form-control"
+                                        class="form-control form-control-sm"
                                         type="text"
                                         placeholder="Juan"
                                         name="fname"
@@ -70,7 +70,7 @@
                                 <div class="form-group">
                                     <label>Middle Name</label>
                                     <input
-                                        class="form-control"
+                                        class="form-control form-control-sm"
                                         type="text"
                                         placeholder="Mariano"
                                         name="mi"
@@ -82,7 +82,7 @@
                                 <div class="form-group">
                                     <label>Last Name</label>
                                     <input
-                                        class="form-control"
+                                        class="form-control form-control-sm"
                                         type="text"
                                         placeholder="Dela Cruz"
                                         name="lname"
@@ -97,7 +97,7 @@
                                 <div class="form-group">
                                     <label>Birthday</label>
                                     <input
-                                        class="form-control"
+                                        class="form-control form-control-sm"
                                         type="date"
                                         name="bday"
                                         required
@@ -107,7 +107,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Gender</label>
-                                    <select name="gender" id="" class="form-control" required>
+                                    <select name="gender" id="" class="form-control form-control-sm" required>
                                         <option value="">Select Gender ..</option>
                                         <option>MALE</option>
                                         <option>FEMALE</option>
@@ -117,7 +117,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Civil Status</label>
-                                    <select name="civil_stat" id="" class="form-control" required>
+                                    <select name="civil_stat" id="" class="form-control form-control-sm" required>
                                         <option value="">Select Status</option>
                                         <option>SINGLE</option>
                                         <option>MARRIED</option>
@@ -137,7 +137,7 @@
                                     <textarea
                                         required
                                         name="address"
-                                        class="form-control"
+                                        class="form-control form-control-sm"
                                     ></textarea>
                                 </div>
                             </div>

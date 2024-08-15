@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\MemberExport;
+use App\Imports\DesignationImport;
 use App\Models\PFII_Member;
 use Illuminate\Http\Request;
 use App\Imports\MemberImport;
@@ -10,7 +11,11 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class PFIIMemberController extends Controller
 {
-    public function importExcel(Request $request){
+    //===================================================================
+    //Export and import
+    //===================================================================
+
+    public function importMember(Request $request){
 
         $request->validate([
            'import_file' => [
@@ -19,17 +24,35 @@ class PFIIMemberController extends Controller
            ]
         ]);
         Excel::import(new MemberImport, $request->file('import_file'));
-//        Excel::toCollection(new MemberImport, $request->file('import_file'));
         return redirect('/admin/members')->with('status','All Goods!');
     }
 
-    public function exportExcel(){
+    public function exportMember(){
         return Excel::download(new MemberExport, 'members.xlsx');
     }
 
+
+    public function importDesig(Request $request){
+
+        $request->validate([
+            'import_file' => [
+                'required',
+                'file'
+            ]
+        ]);
+        Excel::import(new DesignationImport, $request->file('import_file'));
+        return redirect('/admin/designation')->with('status','All Goods!');
+    }
+
+    //=============================================================
+    //CRUD Member
+    //=============================================================
+
+
     public function index()
     {
-        return json_encode(['data' => PFII_Member::where('is_active','Y')->get()]);
+//        return json_encode(['data' => PFII_Member::select('id_no','fname','lname','mi','bday','gender','civil_stat','address','mobile_no','date_expiration')->where('is_active','Y')->orderBy('id_no', 'ASC')->get()]);
+        return json_encode(['data' => PFII_Member::selectRaw('REPLACE(id_no," ","") id_no,UCASE(fname) fname,UCASE(lname) lname,UCASE(mi) mi,bday,UCASE(gender) gender,UCASE(civil_stat) civil_stat,address,mobile_no,date_expiration')->where('is_active','Y')->orderBy('id_no', 'ASC')->get()]);
     }
 
 

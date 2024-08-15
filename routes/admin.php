@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PFIIMemberController;
+use App\Models\PFII_Member;
+use App\Models\PFII_Accomp;
+use App\Models\PFII_designation;
+
 
 
 Route::prefix('admin')->name('admin.')->group(function(){
@@ -13,7 +17,16 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
     Route::middleware(['admin','preventBack'])->group(function(){
         Route::get('/home', function () {
-            return view('/admin.home')->with('title','Home');
+            $members = PFII_Member::where('is_active','Y')->count();
+            $inactive = PFII_Member::where('is_active','N')->count();
+            $accomps = PFII_Accomp::where('is_active','Y')->count();
+            $desig = PFII_designation::where('is_active','Y')->count();
+            return view('/admin.home')
+                ->with('title','Home')
+                ->with('members',$members)
+                ->with('inact',$inactive)
+                ->with('desig',$desig)
+                ->with('accomps',$accomps);
         })->name('home');
 
         Route::get('/members', function () {
@@ -29,7 +42,9 @@ Route::prefix('admin')->name('admin.')->group(function(){
         })->name('form-member');
 
         Route::get('/form-accomp', function () {
-            return view('/admin.forms.f_accomp')->with('title','Accomplishment');
+            return view('/admin.forms.f_accomp')
+                    ->with('title','Accomplishment')
+                    ->with('members',PFII_Member::selectRaw('id,UCASE(fname) fname,UCASE(lname) lname')->where('is_active','Y')->get());
         })->name('form-accomp');
 
         Route::get('/calendar', function () {
@@ -40,12 +55,17 @@ Route::prefix('admin')->name('admin.')->group(function(){
             return view('/admin.monthly-due')->with('title','Monthly Due');
         })->name('monthly-due');
 
+        Route::get('/accomp-report', function () {
+            return view('/admin.report')->with('title','Accompishment Report');
+        })->name('accomp-report');
+
         Route::get('/', function () {
             return view('/admin.index')->with('title','Home');
         });
 
-        Route::post('/import/member',[PFIIMemberController::class,'importExcel' ]);
-        Route::get('/export/member',[PFIIMemberController::class,'exportExcel' ]);
+        Route::post('/import/member',[PFIIMemberController::class,'importMember' ]);
+        Route::get('/export/member',[PFIIMemberController::class,'exportMember' ]);
+        Route::post('/import/desig',[PFIIMemberController::class,'importDesig' ]);
 
 
         Route::get('/test',function(){

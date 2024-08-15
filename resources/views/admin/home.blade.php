@@ -14,9 +14,9 @@
                     <div class="card-box height-100-p widget-style3">
                         <div class="d-flex flex-wrap">
                             <div class="widget-data">
-                                <div class="weight-700 font-24 text-dark">75</div>
+                                <div class="weight-700 font-24 text-dark">{{ $members }}</div>
                                 <div class="font-14 text-secondary weight-500">
-                                    Members
+                                    STA. ANA Members
                                 </div>
                             </div>
                             <div class="widget-icon">
@@ -32,9 +32,9 @@
                     <div class="card-box height-100-p widget-style3">
                         <div class="d-flex flex-wrap">
                             <div class="widget-data">
-                                <div class="weight-700 font-24 text-dark">75</div>
+                                <div class="weight-700 font-24 text-dark">{{ $desig }}</div>
                                 <div class="font-14 text-secondary weight-500">
-                                    Appointment
+                                    Designations
                                 </div>
                             </div>
                             <div class="widget-icon">
@@ -50,8 +50,8 @@
                     <div class="card-box height-100-p widget-style3">
                         <div class="d-flex flex-wrap">
                             <div class="widget-data">
-                                <div class="weight-700 font-24 text-dark">$50,000</div>
-                                <div class="font-14 text-secondary weight-500">Earning</div>
+                                <div class="weight-700 font-24 text-dark">{{ $accomps }}</div>
+                                <div class="font-14 text-secondary weight-500">Accomplishments</div>
                             </div>
                             <div class="widget-icon">
                                 <div class="icon" data-color="#09cc06">
@@ -66,9 +66,9 @@
                     <div class="card-box height-100-p widget-style3">
                         <div class="d-flex flex-wrap">
                             <div class="widget-data">
-                                <div class="weight-700 font-24 text-dark">400+</div>
+                                <div class="weight-700 font-24 text-dark">{{ $inact }}</div>
                                 <div class="font-14 text-secondary weight-500">
-                                    Total Doctor
+                                    Inactive Members
                                 </div>
                             </div>
                             <div class="widget-icon">

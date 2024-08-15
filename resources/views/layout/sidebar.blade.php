@@ -218,8 +218,7 @@
                                 ><span class="mtext">Report</span>
                     </a>
                     <ul class="submenu">
-                        <li><a href="#">Basic Tables</a></li>
-                        <li><a href="#">DataTables</a></li>
+                        <li><a class="{{ (url()->current() == url('/admin/accomp-report')) ? 'active' : '' }}" href="{{ url('/admin/accomp-report') }}">Accomplishment</a></li>
                     </ul>
                 </li>
                 <li>
