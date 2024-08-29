@@ -14,9 +14,11 @@
 
         <div class="xs-pd-20-10 mb-2">
             <div class="row">
-                <button class="btn btn-info btn-sm mr-1" onclick="getModal()">Import</button>
-                <a href="{{ url('/public/temp/member_temp.csv') }}" class="btn btn-warning btn-sm mr-1" >Template</a>
-                <a href="{{ url('admin/export/member') }}" class="btn btn-danger btn-sm mr-1" >Export</a>
+                <div class="col-12">
+                    <button class="btn btn-info btn-sm" onclick="getModal()">Import</button>
+                    <a href="{{ url('/public/temp/member_temp.csv') }}" class="btn btn-warning btn-sm" >Template</a>
+                    <a href="{{ url('admin/export/member') }}" class="btn btn-danger btn-sm" >Export</a>
+                </div>
             </div>
         </div>
         <!-- Simple Datatable start -->

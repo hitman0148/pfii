@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PFIIMemberController;
 use App\Http\Controllers\PFIIDesignationController;
 use App\Http\Controllers\PFIIAccompController;
+use App\Http\Controllers\CalendarController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,3 +47,11 @@ Route::get('/accomp/{id}',[PFIIAccompController::class,'show']);
 Route::post('/accomp',[PFIIAccompController::class,'store']);
 Route::post('/accomp-mod',[PFIIAccompController::class,'update']);
 Route::post('/accomp-rem/{id}',[PFIIAccompController::class,'destroy']);
+
+
+//CALENDAR
+Route::get('/event',[CalendarController::class,'index']);
+Route::get('/event/{id}',[CalendarController::class,'fetch']);
+Route::post('/event',[CalendarController::class,'store']);
+Route::post('/event-mod',[CalendarController::class,'update']);
+Route::post('/event-rem/{id}',[CalendarController::class,'destroy']);

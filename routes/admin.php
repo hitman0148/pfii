@@ -56,7 +56,9 @@ Route::prefix('admin')->name('admin.')->group(function(){
         })->name('monthly-due');
 
         Route::get('/accomp-report', function () {
-            return view('/admin.report')->with('title','Accompishment Report');
+            return view('/admin.report')
+                ->with('title','Accompishment Report')
+                ->with('members',PFII_Member::selectRaw('id,UCASE(fname) fname,UCASE(lname) lname')->where('is_active','Y')->get());
         })->name('accomp-report');
 
         Route::get('/', function () {

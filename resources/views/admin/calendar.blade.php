@@ -31,6 +31,13 @@
                         <div class="modal-footer">
                             <button
                                 type="button"
+                                class="btn btn-warning"
+                                id="btn-del"
+                            >
+                                Delete
+                            </button>
+                            <button
+                                type="button"
                                 class="btn btn-primary"
                                 data-dismiss="modal"
                             >
@@ -118,5 +125,89 @@
 
 @section('scripts')
     <script src="{{ url('resources/assets/admin/src/plugins/fullcalendar/fullcalendar.min.js') }}"></script>
-    <script src="{{ url('resources/assets/admin/vendors/scripts/calendar-setting.js') }}"></script>
+    <script>
+        // var myCal = $('#calendar');
+        // myCal.fullCalendar();
+
+        jQuery(document).ready(function () {
+
+            jQuery("#add-event").submit(function (e) {
+                e.preventDefault();
+                var values = {};
+                $.each($("#add-event").serializeArray(), function (i, field) {
+                    values[field.name] = field.value;
+                });
+                values['created_by'] = "{{ Auth('admin')->user()->name }}";
+                $.ajax({
+                    url: "{{ url('/api/event') }}",
+                    type:'post',
+                    dataType:'json',
+                    data:values,
+                    success:function(data){
+                        jQuery("#modal-view-event-add").modal('hide');
+                    }
+                })
+            });
+            getDatas();
+        });
+
+        function getDatas(){
+            $.ajax({
+                url: "{{ url('/api/event') }}",
+                type: 'get',
+                dataType: 'json',
+                success:function(data){
+                    console.log(data.data);
+                    myCalendar(data.data)
+                }
+            })
+        }
+
+        function myCalendar(evt){
+
+            jQuery("#calendar").fullCalendar({
+                themeSystem: "bootstrap4",
+                // emphasizes business hours
+                businessHours: false,
+                defaultView: "month",
+                // event dragging & resizing
+                editable: true,
+                // header
+                header: {
+                    left: "title",
+                    center: "month,agendaWeek,agendaDay",
+                    right: "today prev,next",
+                },
+                events: evt,
+                dayClick: function () {
+                    jQuery("#modal-view-event-add").modal();
+                },
+                eventClick: function (event, jsEvent, view) {
+                    console.log('events',event.id)
+                    jQuery(".event-icon").html("<i class='fa fa-" + event.icon + "'></i>");
+                    jQuery(".event-title").html(event.title);
+                    jQuery(".event-body").html(event.description);
+                    jQuery(".eventUrl").attr("href", event.url);
+                    jQuery("#modal-view-event").modal();
+                    $('#btn-del').attr({'data':event.id});
+                },
+            });
+
+        }
+
+
+        $('#btn-del').on('click',function(){
+            var id = $(this).attr('data');
+            $.ajax({
+                url:"{{ url('/api/event-rem') }}/"+id,
+                type:'post',
+                success:function(data){
+                    console.log(data);
+                    jQuery("#modal-view-event").modal('hide');
+                    $("#calendar").refetchEvents();
+                }
+            })
+        });
+
+    </script>
 @endsection

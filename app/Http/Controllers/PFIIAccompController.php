@@ -56,7 +56,7 @@ class PFIIAccompController extends Controller
             'remarks' => $request->remarks,
             'personels' => $request->personels,
         );
-        return PFII_Accomp::where('id',$request->id)->udpate($data);
+        return PFII_Accomp::where('id',$request->id)->update($data);
     }
 
 

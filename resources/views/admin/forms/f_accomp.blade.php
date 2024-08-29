@@ -100,9 +100,6 @@
     <script src="{{ url('resources/assets/admin/src/plugins/sweetalert2/sweetalert2.all.js') }}"></script>
 
 <script>
-    // $(document).ready(function(){
-    //
-    // })
 
     $(document).on('submit','#accompForm',function(e){
         e.preventDefault();
@@ -126,8 +123,7 @@
 
 
     function swalSuccess(msg) {
-        swal(
-            {
+        swal({
                 title: 'Good job!',
                 text: msg,
                 type: 'success',
@@ -135,8 +131,7 @@
                 confirmButtonClass: 'btn btn-success',
                 cancelButtonClass: 'btn btn-danger',
                 timer: 1500
-            }
-        )
+            })
     }
 </script>
 @endsection
