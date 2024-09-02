@@ -13,7 +13,7 @@ class CreatePFIIAccompsTable extends Migration
      */
     public function up()
     {
-        Schema::create('pfii__accomps', function (Blueprint $table) {
+        Schema::create('pfii_accomps', function (Blueprint $table) {
             $table->id();
             $table->date('activity_date');
             $table->string('site');

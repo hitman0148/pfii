@@ -88,11 +88,11 @@
 						<img src="{{ url('resources/assets/admin/vendors/images/deskapp-logo.svg') }}" alt="" />
 					</a>
 				</div>
-				<div class="login-menu">
+				{{-- <div class="login-menu">
 					<ul>
 						<li><a href="{{ url('/register') }}">Register</a></li>
 					</ul>
-				</div>
+				</div> --}}
 			</div>
 		</div>
 		<div
@@ -158,7 +158,7 @@
                                     {{ $message }}
                                 </div>
                                 @enderror
-								<div class="row pb-30">
+								{{-- <div class="row pb-30">
 									<div class="col-6">
 										<div class="custom-control custom-checkbox">
 											<input
@@ -176,7 +176,7 @@
 											<a href="forgot-password.html">Forgot Password</a>
 										</div>
 									</div>
-								</div>
+								</div> --}}
 								<div class="row">
 									<div class="col-sm-12">
 										<div class="input-group mb-0">
@@ -188,7 +188,7 @@
 {{--											>--}}
                                             <button class="btn btn-primary btn-lg btn-block" type="submit">Sign In</button>
 										</div>
-										<div
+										{{-- <div
 											class="font-16 weight-600 pt-10 pb-10 text-center"
 											data-color="#707373"
 										>
@@ -200,7 +200,7 @@
 												href="register.html"
 												>Register To Create Account</a
 											>
-										</div>
+										</div> --}}
 									</div>
 								</div>
 							</form>

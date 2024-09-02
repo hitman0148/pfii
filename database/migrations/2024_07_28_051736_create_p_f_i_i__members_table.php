@@ -13,7 +13,7 @@ class CreatePFIIMembersTable extends Migration
      */
     public function up()
     {
-        Schema::create('pfii__members', function (Blueprint $table) {
+        Schema::create('pfii_members', function (Blueprint $table) {
             $table->id();
             $table->string('id_no');
             $table->string('fname');
