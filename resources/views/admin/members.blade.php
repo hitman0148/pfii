@@ -18,6 +18,7 @@
                     <button class="btn btn-info btn-sm" onclick="getModal()">Import</button>
                     <a href="{{ url('/public/temp/member_temp.csv') }}" class="btn btn-warning btn-sm" >Template</a>
                     <a href="{{ url('admin/export/member') }}" class="btn btn-danger btn-sm" >Export</a>
+                    <a href="{{ url('admin/pdf-attendance') }}" class="btn btn-info btn-sm" >Attendance</a>
                 </div>
             </div>
         </div>

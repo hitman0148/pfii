@@ -42,12 +42,11 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
-                                    <label>Mobile No</label>
+                                    <label>Mobile No.</label>
                                     <input
                                         class="form-control form-control-sm"
                                         type="text"
                                         name="mobile_no"
-                                        required
                                     />
                                 </div>
                             </div>
@@ -100,14 +99,13 @@
                                         class="form-control form-control-sm"
                                         type="date"
                                         name="bday"
-                                        required
                                     />
                                 </div>
                             </div>
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Gender</label>
-                                    <select name="gender" id="" class="form-control form-control-sm" required>
+                                    <select name="gender" id="" class="form-control form-control-sm" >
                                         <option value="">Select Gender ..</option>
                                         <option>MALE</option>
                                         <option>FEMALE</option>
@@ -117,7 +115,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label>Civil Status</label>
-                                    <select name="civil_stat" id="" class="form-control form-control-sm" required>
+                                    <select name="civil_stat" id="" class="form-control form-control-sm" >
                                         <option value="">Select Status</option>
                                         <option>SINGLE</option>
                                         <option>MARRIED</option>
@@ -135,7 +133,6 @@
                                 <div class="form-group">
                                     <label>Address</label>
                                     <textarea
-                                        required
                                         name="address"
                                         class="form-control form-control-sm"
                                     ></textarea>

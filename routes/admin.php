@@ -6,13 +6,17 @@ use App\Http\Controllers\PFIIMemberController;
 use App\Models\PFII_Member;
 use App\Models\PFII_Accomp;
 use App\Models\PFII_designation;
-
-
+use App\Http\Controllers\PdfController;
 
 Route::prefix('admin')->name('admin.')->group(function(){
 
-
-    Route::get('pdf_download',[\App\Http\Controllers\PdfController::class,'download123']);
+    Route::get('pdf-attendance',[PdfController::class,'dlAttendance']);
+    Route::get('attd-view',function(){
+        $members = PFII_Member::where('is_active','Y')->orderBy('lname')->get();
+        return view('admin.attendance')
+            ->with('title','PARDSS STA-ANA ATTENDANCE')
+            ->with('members',$members);
+    });
     Route::post('login_handler',[AdminController::class,'loginHandler'])->name('login_handler');
     Route::get('logout',[AdminController::class,'logOut'])->name('logout');
 
@@ -33,6 +37,10 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/members', function () {
             return view('/admin.members')->with('title','Members');
         })->name('members');
+
+        Route::get('/attendance', function () {
+            return view('/admin.attendance')->with('title','Attendance');
+        })->name('attendance');
 
         Route::get('/designation', function () {
             return view('/admin.designation')->with('title','Designation');
