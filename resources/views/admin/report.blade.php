@@ -86,6 +86,7 @@
                                 <div class="form-group">
                                     <label>Date</label>
                                     <input
+                                        required
                                         class="form-control form-control-sm"
                                         type="date"
                                         id="_activity_date"
@@ -96,7 +97,7 @@
                             <div class="col-md-8 col-sm-8">
                                 <div class="form-group">
                                     <label>Location</label>
-                                    <input type="text" name="site" id="_site" class="form-control form-control-sm">
+                                    <input required type="text" name="site" id="_site" class="form-control form-control-sm">
                                 </div>
                             </div>
 
@@ -107,12 +108,8 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Agenda</label>
-{{--                                    <textarea--}}
-{{--                                        class="textarea_editor form-control border-radius-0"--}}
-{{--                                        name="activity"--}}
-{{--                                        id="_activity"--}}
-{{--                                    ></textarea>--}}
                                     <textarea
+                                        required
                                         class=" form-control border-radius-0"
                                         name="activity"
                                         id="_activity"

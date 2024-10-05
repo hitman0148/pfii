@@ -60,13 +60,13 @@ class PFIIMemberController extends Controller
     {
         $member = new PFII_Member();
         $member->id_no = $request->id_no;
-        $member->fname = $request->fname;
-        $member->lname = $request->lname;
-        $member->mi = $request->mi;
+        $member->fname = strtoupper($request->fname);
+        $member->lname = strtoupper($request->lname);
+        $member->mi = strtoupper($request->mi);
         $member->bday = $request->bday;
         $member->gender = $request->gender;
         $member->civil_stat = $request->civil_stat;
-        $member->address = $request->address;
+        $member->address = strtoupper($request->address);
         $member->mobile_no = $request->mobile_no;
         $member->date_expiration = $request->date_expiration;
         if($member->save()){

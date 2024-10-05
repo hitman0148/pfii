@@ -7,16 +7,20 @@ use App\Models\PFII_Member;
 use App\Models\PFII_Accomp;
 use App\Models\PFII_designation;
 use App\Http\Controllers\PdfController;
+use App\Http\Controllers\PFIIMonthlyDueController;
 
 Route::prefix('admin')->name('admin.')->group(function(){
 
     Route::get('pdf-attendance',[PdfController::class,'dlAttendance']);
+    //this route is for view of attendance only
     Route::get('attd-view',function(){
         $members = PFII_Member::where('is_active','Y')->orderBy('lname')->get();
         return view('admin.attendance')
             ->with('title','PARDSS STA-ANA ATTENDANCE')
             ->with('members',$members);
     });
+
+
     Route::post('login_handler',[AdminController::class,'loginHandler'])->name('login_handler');
     Route::get('logout',[AdminController::class,'logOut'])->name('logout');
 
@@ -60,9 +64,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
             return view('/admin.calendar')->with('title','Calendar');
         })->name('calendar');
 
-        Route::get('/monthly-due', function () {
-            return view('/admin.monthly-due')->with('title','Monthly Due');
-        })->name('monthly-due');
+        Route::get('monthly-due',[PFIIMonthlyDueController::class,'page'])->name('monthly-due');
 
         Route::get('/accomp-report', function () {
             return view('/admin.report')
@@ -82,6 +84,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
         Route::get('/test',function(){
             return view('sample')->with('title','Sample');
         });
+
+        Route::get('/test2',[PFIIMonthlyDueController::class, 'index']);
 
     });
 

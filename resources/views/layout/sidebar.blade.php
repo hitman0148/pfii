@@ -200,6 +200,13 @@
                     </a>
                 </li>
 
+                <li>
+                    <a href="{{ route('admin.monthly-due') }}" class="dropdown-toggle no-arrow">
+								<span class="micon fa fa-users"></span
+                                ><span class="mtext">Monthly Due</span>
+                    </a>
+                </li>
+
                 <li class="dropdown">
                     <a href="javascript:;" class="dropdown-toggle">
 								<span class="micon bi bi-table"></span

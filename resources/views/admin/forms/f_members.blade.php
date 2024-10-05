@@ -36,7 +36,6 @@
                                         class="form-control form-control-sm"
                                         type="date"
                                         name="date_expiration"
-                                        required
                                     />
                                 </div>
                             </div>

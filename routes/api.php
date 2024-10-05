@@ -7,6 +7,7 @@ use App\Http\Controllers\PFIIMemberController;
 use App\Http\Controllers\PFIIDesignationController;
 use App\Http\Controllers\PFIIAccompController;
 use App\Http\Controllers\CalendarController;
+use App\Http\Controllers\PFIIMonthlyDueController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,3 +56,9 @@ Route::get('/event/{id}',[CalendarController::class,'fetch']);
 Route::post('/event',[CalendarController::class,'store']);
 Route::post('/event-mod',[CalendarController::class,'update']);
 Route::post('/event-rem/{id}',[CalendarController::class,'destroy']);
+
+
+//MONTHLY DUE
+Route::get('/monthly',[PFIIMonthlyDueController::class, 'index']);
+Route::post('/monthly',[PFIIMonthlyDueController::class,'store']);
+Route::post('/mod-monthly',[PFIIMonthlyDueController::class,'update']);
