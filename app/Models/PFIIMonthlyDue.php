@@ -12,6 +12,6 @@ class PFIIMonthlyDue extends Model
     protected $table ='monthlydue';
     public $timestamps = false;
     protected $fillable = [
-        'mid','date','amt','date_created','created_by'
+        'mid','member_id','amt','date_created','created_by'
     ];
 }

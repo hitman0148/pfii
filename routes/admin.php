@@ -82,10 +82,9 @@ Route::prefix('admin')->name('admin.')->group(function(){
 
 
         Route::get('/test',function(){
-            return view('sample')->with('title','Sample');
+//            return view('sample')->with('title','Sample');
+            return view('welcome')->with('title','Sample');
         });
-
-        Route::get('/test2',[PFIIMonthlyDueController::class, 'index']);
 
     });
 

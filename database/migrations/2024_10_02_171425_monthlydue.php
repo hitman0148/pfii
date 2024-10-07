@@ -16,6 +16,7 @@ class Monthlydue extends Migration
         Schema::create('monthlydue', function (Blueprint $table) {
             $table->id();
             $table->integer('mid');
+            $table->integer('member_id');
             $table->string('date')->nullable();
             $table->string('amt')->nullable()->default('0');
             $table->dateTime('date_created');
